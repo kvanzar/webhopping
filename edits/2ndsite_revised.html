@@ -25,7 +25,7 @@
     }
 
     .hidden-hint {
-      color: #111; /* Match background to hide it */
+      color: #111; 
       font-size: 1.2rem;
     }
     .hidden-area {
@@ -85,26 +85,25 @@
   <div class="hidden-area"></div>
 
   <div class="bottom-link">
-    <a href="http://127.0.0.1:5500/3rdsite.html" target="_blank">Next link</a>
+
+    <a href="3rdsite_revised.html" target="_blank">Next link</a>
   </div>
 
   <script>
     document.addEventListener('keydown', function (event) {
-      // Detect Ctrl + A combination
-      if (event.ctrlKey && event.key === 'a') {
-        event.preventDefault(); // Prevent the default behavior
-        // Reveal the hint text by changing the color
-        document.querySelector('.hidden-hint').style.color = '#FF00AA';
 
-        // Activate the hover area
+      if (event.ctrlKey && event.key === 'a') {
+        event.preventDefault(); 
+
+        document.querySelector('.hidden-hint').style.color = '#FF00AA';
         document.querySelector('.hidden-area').classList.add('active');
       }
     });
 
-    // Add hover effect after Ctrl + A has been pressed
+
     document.querySelector('.hidden-area').addEventListener('mouseover', function () {
       if (this.classList.contains('active')) {
-        // Reveal the hidden link only after Ctrl + A
+
         document.querySelector('.bottom-link').classList.add('active');
       }
     });
