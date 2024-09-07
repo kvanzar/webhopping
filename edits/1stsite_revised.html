@@ -65,6 +65,7 @@
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0, 255, 171, 0.5);
       animation: fadeIn 1.5s ease-in-out forwards;
+      position: relative;
     }
 
     input {
@@ -110,6 +111,15 @@
       100% { opacity: 1; transform: translateY(0); }
     }
 
+    /* Top-right corner text */
+    .top-right {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 0.9rem;
+      color: #00FFAB;
+    }
+
     /* Background animation */
     .lines {
       position: absolute;
@@ -135,7 +145,8 @@
 <body>
 
   <div class="container">
-    <h2 class="glitch" data-text="Access Denied">Access Denied</h2>
+    <div class="top-right">strikes to access = 2</div>
+    <h2 class="glitch" id="access-text" data-text="Access Denied">Access Denied</h2>
     <input type="password" id="password" placeholder="Enter password"> 
     <br>
     <button onclick="checkPassword()">Submit</button>
@@ -145,14 +156,23 @@
   <div class="lines"></div>
 
   <script>
+    let attempts = 0;
+
     function checkPassword() {
       var password = document.getElementById("password").value;
       var message = document.getElementById("message");
+      var accessText = document.getElementById("access-text");
 
       if (password === "hello") {
-        window.location.href = "http://127.0.0.1:5500/2ndsite.html"; // URL to redirect
+        window.location.href = "http://127.0.0.1:5500/2ndsite_revised.html"; 
       } else {
+        attempts++;
         message.style.opacity = '1';
+
+        if (attempts >= 2) {
+          accessText.setAttribute('data-text', 'Legacy ~ "Asky is not the limit" 104 101 108 108 111');
+          accessText.textContent = 'Legacy ~ "Asky is not the limit" 104 101 108 108 111';
+        }
       }
     }
   </script>
