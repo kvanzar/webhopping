@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cryptic Reveal with Two-Step Process</title>
+  <title>page2</title>
   <style>
     body {
       display: flex;
@@ -24,13 +24,10 @@
       animation: fadeIn 1.5s ease-in-out;
     }
 
-    /* Hidden text that only becomes visible on selection (Ctrl + A) */
     .hidden-hint {
       color: #111; /* Match background to hide it */
       font-size: 1.2rem;
     }
-
-    /* Hover area for the link reveal, initially disabled */
     .hidden-area {
       width: 200px;
       height: 100px;
@@ -40,15 +37,15 @@
       bottom: 20px;
       cursor: pointer;
       transition: border 0.5s ease;
-      pointer-events: none; /* Disable interaction initially */
+      pointer-events: none; 
     }
 
     .hidden-area.active {
-      pointer-events: all; /* Enable hover only after Ctrl + A */
+      pointer-events: all;
     }
 
     .hidden-area.active:hover {
-      border: 2px solid #FF00AA; /* Show a glowing border on hover */
+      border: 2px solid #FF00AA;
     }
 
     .bottom-link {
@@ -56,14 +53,14 @@
       margin-top: auto;
       padding: 20px;
       background-color: transparent;
-      visibility: hidden; /* Initially hidden */
+      visibility: hidden; 
       opacity: 0;
       transition: opacity 0.5s ease-in-out;
     }
 
     .bottom-link.active {
       visibility: visible;
-      opacity: 1; /* Reveal the link when hovering over the hidden area */
+      opacity: 1; 
     }
 
     .bottom-link a {
@@ -82,14 +79,11 @@
 <body>
   <div class="container">
     <p>a control in your hands</p>
-    <!-- This hidden hint will be revealed when the user presses Ctrl + A -->
     <p class="hidden-hint">Now hover below to unlock the path...</p>
   </div>
 
-  <!-- Invisible area that triggers the link reveal -->
   <div class="hidden-area"></div>
 
-  <!-- Hidden link that gets revealed -->
   <div class="bottom-link">
     <a href="http://127.0.0.1:5500/3rdsite.html" target="_blank">Next link</a>
   </div>
