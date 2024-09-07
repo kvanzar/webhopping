@@ -3,140 +3,110 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page 3 </title>
+  <title>page2</title>
   <style>
     body {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      margin: 0;
       background-color: #111;
+      color: #00FFAB;
       font-family: 'Courier New', monospace;
-      color: #fff;
-      flex-direction: column;
-    }
-
-    .hint {
-      font-size: 1.2rem;
-      text-align: center;
-      color: #FF00AA;
-      margin-bottom: 20px;
-      animation: glitch 2s infinite;
+      position: relative;
     }
 
     .container {
       text-align: center;
-      background-color: rgba(0, 0, 0, 0.8);
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 255, 171, 0.5);
+      font-size: 1.5rem;
       animation: fadeIn 1.5s ease-in-out;
-      position: relative;
-      overflow: hidden;
     }
 
-    h2 {
-      margin-bottom: 20px;
-      color: #00FFAB;
-      animation: glitch 2s infinite;
+    .hidden-hint {
+      color: #111; 
+      font-size: 1.2rem;
     }
-
-    input {
-      padding: 10px;
-      margin-top: 10px;
-      font-size: 16px;
+    .hidden-area {
       width: 200px;
-      border: 1px solid #00FFAB;
-      border-radius: 4px;
+      height: 100px;
       background-color: transparent;
-      color: #fff;
-      animation: glitch 2s infinite;
-    }
-
-    button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #00FFAB;
-      color: #000;
-      border: none;
-      border-radius: 4px;
+      border: 2px solid transparent;
+      position: absolute;
+      bottom: 20px;
       cursor: pointer;
-      transition: background-color 0.3s;
-      animation: glitch 2s infinite;
+      transition: border 0.5s ease;
+      pointer-events: none; 
     }
 
-    button:hover {
-      background-color: #FF00AA;
+    .hidden-area.active {
+      pointer-events: all;
+    }
+
+    .hidden-area.active:hover {
+      border: 2px solid #FF00AA;
+    }
+
+    .bottom-link {
+      text-align: center;
+      margin-top: auto;
+      padding: 20px;
+      background-color: transparent;
+      visibility: hidden; 
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .bottom-link.active {
+      visibility: visible;
+      opacity: 1; 
+    }
+
+    .bottom-link a {
+      color: #00FFAB;
+      text-decoration: none;
+      font-size: 1.2rem;
+      position: relative;
     }
 
     @keyframes fadeIn {
       0% { opacity: 0; }
       100% { opacity: 1; }
     }
-
-    @keyframes glitch {
-      0% {
-        text-shadow: 1px 1px rgba(255, 0, 170, 0.75), -1px -1px rgba(0, 255, 171, 0.75);
-        transform: translate(0);
-      }
-      25% {
-        text-shadow: 2px 2px rgba(255, 0, 170, 0.5), -2px -2px rgba(0, 255, 171, 0.5);
-        transform: translate(-1px, -1px);
-      }
-      50% {
-        text-shadow: 1px 1px rgba(0, 255, 171, 0.75), -1px -1px rgba(255, 0, 170, 0.75);
-        transform: translate(1px, 1px);
-      }
-      75% {
-        text-shadow: 3px 3px rgba(255, 0, 170, 0.25), -3px -3px rgba(0, 255, 171, 0.25);
-        transform: translate(-2px, -2px);
-      }
-      100% {
-        text-shadow: 1px 1px rgba(255, 0, 170, 0.75), -1px -1px rgba(0, 255, 171, 0.75);
-        transform: translate(0);
-      }
-    }
-
-    #message {
-      color: red;
-      margin-top: 10px;
-      opacity: 0;
-      transition: opacity 0.5s;
-    }
-
-    #message.show {
-      opacity: 1;
-    }
-
   </style>
 </head>
 <body>
-
-  <div class="hint">
-    Find the hidden script where the essence is woven, behind the visual illusion where the structure remains unspoken.
-  </div>
-  
   <div class="container">
-    <h2>Enter Password</h2>
-    <input type="password" id="password" placeholder="Enter password">
-    <br>
-    <button onclick="checkPassword()">Submit</button>
-    <p id="message"></p>
+    <p>a control in your hands</p>
+    <p class="hidden-hint">Now hover below to unlock the path...</p>
+  </div>
+
+  <div class="hidden-area"></div>
+
+  <div class="bottom-link">
+
+    <a href="3rdsite_revised.html" target="_blank">Next link</a>
   </div>
 
   <script>
-    function checkPassword() {
-      var password = document.getElementById("password").value;
-      var message = document.getElementById("message");
+    document.addEventListener('keydown', function (event) {
 
-      if (password === "next") {
-        window.location.href = "https://www.google.com"; // URL to redirect
-      } else {
-        message.textContent = "Incorrect password. Try again.";
-        message.classList.add('show');
+      if (event.ctrlKey && event.key === 'a') {
+        event.preventDefault(); 
+
+        document.querySelector('.hidden-hint').style.color = '#FF00AA';
+        document.querySelector('.hidden-area').classList.add('active');
       }
-    }
+    });
+
+
+    document.querySelector('.hidden-area').addEventListener('mouseover', function () {
+      if (this.classList.contains('active')) {
+
+        document.querySelector('.bottom-link').classList.add('active');
+      }
+    });
   </script>
 </body>
 </html>
