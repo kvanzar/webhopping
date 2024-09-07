@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cryptic Reveal with Two-Step Process</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #111;
+      color: #00FFAB;
+      font-family: 'Courier New', monospace;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+      font-size: 1.5rem;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    /* Hidden text that only becomes visible on selection (Ctrl + A) */
+    .hidden-hint {
+      color: #111; /* Match background to hide it */
+      font-size: 1.2rem;
+    }
+
+    /* Hover area for the link reveal, initially disabled */
+    .hidden-area {
+      width: 200px;
+      height: 100px;
+      background-color: transparent;
+      border: 2px solid transparent;
+      position: absolute;
+      bottom: 20px;
+      cursor: pointer;
+      transition: border 0.5s ease;
+      pointer-events: none; /* Disable interaction initially */
+    }
+
+    .hidden-area.active {
+      pointer-events: all; /* Enable hover only after Ctrl + A */
+    }
+
+    .hidden-area.active:hover {
+      border: 2px solid #FF00AA; /* Show a glowing border on hover */
+    }
+
+    .bottom-link {
+      text-align: center;
+      margin-top: auto;
+      padding: 20px;
+      background-color: transparent;
+      visibility: hidden; /* Initially hidden */
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .bottom-link.active {
+      visibility: visible;
+      opacity: 1; /* Reveal the link when hovering over the hidden area */
+    }
+
+    .bottom-link a {
+      color: #00FFAB;
+      text-decoration: none;
+      font-size: 1.2rem;
+      position: relative;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p>a control in your hands</p>
+    <!-- This hidden hint will be revealed when the user presses Ctrl + A -->
+    <p class="hidden-hint">Now hover below to unlock the path...</p>
+  </div>
+
+  <!-- Invisible area that triggers the link reveal -->
+  <div class="hidden-area"></div>
+
+  <!-- Hidden link that gets revealed -->
+  <div class="bottom-link">
+    <a href="http://127.0.0.1:5500/3rdsite.html" target="_blank">Next link</a>
+  </div>
+
+  <script>
+    document.addEventListener('keydown', function (event) {
+      // Detect Ctrl + A combination
+      if (event.ctrlKey && event.key === 'a') {
+        event.preventDefault(); // Prevent the default behavior
+        // Reveal the hint text by changing the color
+        document.querySelector('.hidden-hint').style.color = '#FF00AA';
+
+        // Activate the hover area
+        document.querySelector('.hidden-area').classList.add('active');
+      }
+    });
+
+    // Add hover effect after Ctrl + A has been pressed
+    document.querySelector('.hidden-area').addEventListener('mouseover', function () {
+      if (this.classList.contains('active')) {
+        // Reveal the hidden link only after Ctrl + A
+        document.querySelector('.bottom-link').classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>
