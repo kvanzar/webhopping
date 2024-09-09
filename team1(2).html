@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>page2</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #111;
+      color: #00FFAB;
+      font-family: 'Courier New', monospace;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+      font-size: 1.5rem;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .hidden-hint {
+      color: #111; 
+      font-size: 1.2rem;
+    }
+    .hidden-area {
+      width: 200px;
+      height: 100px;
+      background-color: transparent;
+      border: 2px solid transparent;
+      position: absolute;
+      bottom: 20px;
+      cursor: pointer;
+      transition: border 0.5s ease;
+      pointer-events: none; 
+    }
+
+    .hidden-area.active {
+      pointer-events: all;
+    }
+
+    .hidden-area.active:hover {
+      border: 2px solid #FF00AA;
+    }
+
+    .bottom-link {
+      text-align: center;
+      margin-top: auto;
+      padding: 20px;
+      background-color: transparent;
+      visibility: hidden; 
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .bottom-link.active {
+      visibility: visible;
+      opacity: 1; 
+    }
+
+    .bottom-link a {
+      color: #00FFAB;
+      text-decoration: none;
+      font-size: 1.2rem;
+      position: relative;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p>a control in your hands</p>
+    <br>
+    <p class="hidden-hint">Now hover below to unlock the path...</p>
+  </div>
+
+  <div class="hidden-area"></div>
+
+  <div class="bottom-link">
+
+    <a href="http://127.0.0.1:5500/team1(3).html" target="_blank">Next link</a>
+  </div>
+
+  <script>
+    document.addEventListener('keydown', function (event) {
+
+      if (event.ctrlKey && event.key === 'a') {
+        event.preventDefault(); 
+
+        document.querySelector('.hidden-hint').style.color = '#FF00AA';
+        document.querySelector('.hidden-area').classList.add('active');
+      }
+    });
+
+
+    document.querySelector('.hidden-area').addEventListener('mouseover', function () {
+      if (this.classList.contains('active')) {
+
+        document.querySelector('.bottom-link').classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>
