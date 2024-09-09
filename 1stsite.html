@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>page1</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #111;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+      color: #fff;
+    }
+    .glitch {
+      position: relative;
+      font-size: 2rem;
+      color: #00FFAB;
+      animation: glitch 1s infinite;
+    }
+    .glitch::before, .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+    .glitch::before {
+      left: 2px;
+      text-shadow: -2px 0 red;
+      clip: rect(24px, 550px, 90px, 0);
+      animation: glitchTop 1.5s infinite linear alternate-reverse;
+    }
+    .glitch::after {
+      left: -2px;
+      text-shadow: -2px 0 blue;
+      clip: rect(85px, 550px, 140px, 0);
+      animation: glitchBot 1.5s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch {
+      0% { transform: skew(0.5deg); }
+      10% { transform: skew(2deg); }
+      20% { transform: skew(-0.5deg); }
+      30% { transform: skew(1.5deg); }
+      40%, 100% { transform: skew(0deg); }
+    }
+    @keyframes glitchTop {
+      0% { clip: rect(42px, 550px, 56px, 0); }
+      100% { clip: rect(10px, 550px, 130px, 0); }
+    }
+    @keyframes glitchBot {
+      0% { clip: rect(85px, 550px, 90px, 0); }
+      100% { clip: rect(130px, 550px, 180px, 0); }
+    }
+
+    .container {
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 255, 171, 0.5);
+      animation: fadeIn 1.5s ease-in-out forwards;
+      position: relative;
+    }
+
+    input {
+      padding: 10px;
+      margin-top: 15px;
+      font-size: 18px;
+      width: 220px;
+      border: 2px solid #00FFAB;
+      background-color: transparent;
+      color: white;
+      border-radius: 4px;
+      transition: 0.3s;
+    }
+    input:focus {
+      outline: none;
+      border-color: #FF00AA;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #00FFAB;
+      color: black;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #FF00AA;
+    }
+
+    #message {
+      margin-top: 15px;
+      color: #FF4444;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Top-right corner text */
+    .top-right {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 0.9rem;
+      color: #00FFAB;
+    }
+
+    /* Background animation */
+    .lines {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(0, 255, 171, 0.05),
+        rgba(0, 255, 171, 0.05) 1px,
+        transparent 1px,
+        transparent 50px
+      );
+      pointer-events: none;
+      animation: glitchBg 10s infinite;
+    }
+
+    @keyframes glitchBg {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(20px, -20px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-right">strikes to access = 2</div>
+    <h2 class="glitch" id="access-text" data-text="Access Denied">Access Denied</h2>
+    <input type="password" id="password" placeholder="Enter password"> 
+    <br>
+    <button onclick="checkPassword()">Submit</button>
+    <p id="message">Incorrect password. Try again.</p>
+  </div>
+
+  <div class="lines"></div>
+
+  <script>
+    let attempts = 0;
+
+    function checkPassword() {
+      var password = document.getElementById("password").value;
+      var message = document.getElementById("message");
+      var accessText = document.getElementById("access-text");
+
+      if (password === "hello") {
+        window.location.href = "http://127.0.0.1:5500/2ndsite.html"; 
+      } else {
+        attempts++;
+        message.style.opacity = '1';
+
+        if (attempts >= 2) {
+          accessText.setAttribute('data-text', 'Legacy ~ "Asky is not the limit" 104 101 108 108 111');
+          accessText.textContent = 'Legacy ~ "Asky is not the limit" 104 101 108 108 111';
+        }
+      }
+    }
+  </script>
+</body>
+</html>
